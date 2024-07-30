@@ -26,6 +26,8 @@ function y = saddle_discrete(x,r,epsilon,varargin)
     elseif p.Results.dist == '1dlinear'
         epsilon = epsilon*(1-r); % adjust the noise so that boundary is fixed
         y = r*x + unifrnd(-epsilon,epsilon,size(x));
+    elseif p.Results.dist == '1dlinearfull' % not adjusting noise magnitude
+        y = r*x + unifrnd(-epsilon,epsilon,size(x));
     elseif p.Results.dist == '1dlinearnormal'
         epsilon = epsilon*(1-r); % adjust the noise so that boundary is fixed
         pd = makedist( 'Normal','sigma',0.5*epsilon);
@@ -38,5 +40,8 @@ function y = saddle_discrete(x,r,epsilon,varargin)
         % f = @(x) (3+4*r)*((1-exp(-x-r))./(1+exp(-x-r)))-4*r; % an invertible map
         f = @(x) erf((2+r)*x-r^2);
         y = f(x) + unifrnd(-epsilon,epsilon,size(x));
+    elseif p.Results.dist == 'xdepend1duni'
+        f = @(x) 3*((1-exp(-x))./(1+exp(-x)));
+        y = f(x) - r + unifrnd(-epsilon,epsilon,size(x)).*x;
     end
 end
