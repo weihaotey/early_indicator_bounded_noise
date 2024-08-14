@@ -1,4 +1,4 @@
-# early_indicator_bounded_noise
+# Early indicator for bounded noise model
 Numerical approximation of derivative of extremal maps for one-dimensional random difference equation with bounded noise. This provides an early indicator for critical transitions.
 
 File 'lambda_estimate.m'
